@@ -1,0 +1,102 @@
+{
+  "viewerSequences": [
+    {
+      "key": "watergun",
+      "label": "watergun",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/watergun/thumbnail.png",
+      "metadataPath": "assets/interactive/watergun/metadata.json"
+    },
+    {
+      "key": "scissors",
+      "label": "scissors",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/scissors/thumbnail.png",
+      "metadataPath": "assets/interactive/scissors/metadata.json"
+    },
+    {
+      "key": "blackpen",
+      "label": "blackpen",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/blackpen/thumbnail.png",
+      "metadataPath": "assets/interactive/blackpen/metadata.json"
+    },
+    {
+      "key": "pen",
+      "label": "pen",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/pen/thumbnail.png",
+      "metadataPath": "assets/interactive/pen/metadata.json"
+    },
+    {
+      "key": "transformer",
+      "label": "transformer",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/transformer/thumbnail.png",
+      "metadataPath": "assets/interactive/transformer/metadata.json"
+    },
+    {
+      "key": "screwdriver",
+      "label": "screwdriver",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/screwdriver/thumbnail.png",
+      "metadataPath": "assets/interactive/screwdriver/metadata.json"
+    },
+    {
+      "key": "psyduck",
+      "label": "psyduck",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/psyduck/thumbnail.png",
+      "metadataPath": "assets/interactive/psyduck/metadata.json"
+    },
+    {
+      "key": "squirrel",
+      "label": "squirrel",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/squirrel/thumbnail.png",
+      "metadataPath": "assets/interactive/squirrel/metadata.json"
+    },
+    {
+      "key": "giraffe",
+      "label": "giraffe",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/giraffe/thumbnail.png",
+      "metadataPath": "assets/interactive/giraffe/metadata.json"
+    },
+    {
+      "key": "lion",
+      "label": "lion",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/lion/thumbnail.png",
+      "metadataPath": "assets/interactive/lion/metadata.json"
+    },
+    {
+      "key": "boxcutter",
+      "label": "boxcutter",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/boxcutter/thumbnail.png",
+      "metadataPath": "assets/interactive/boxcutter/metadata.json"
+    },
+    {
+      "key": "car",
+      "label": "car",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/car/thumbnail.png",
+      "metadataPath": "assets/interactive/car/metadata.json"
+    },
+    {
+      "key": "whitebird",
+      "label": "whitebird",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/whitebird/thumbnail.png",
+      "metadataPath": "assets/interactive/whitebird/metadata.json"
+    },
+    {
+      "key": "pokemon",
+      "label": "pokemon",
+      "dataset": "Handbooth",
+      "thumbnail": "assets/interactive/pokemon/thumbnail.png",
+      "metadataPath": "assets/interactive/pokemon/metadata.json"
+    }
+  ]
+}

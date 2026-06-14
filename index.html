@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="High-Fidelity 4D Hand-Object Capture via Multi-View Spatiotemporal Tracking and Physics-Aware Gaussians">
+  <meta name="keywords" content="4D Reconstruction, Hand-Object Interaction, Gaussian Splatting, Spatiotemporal Prior">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>High-Fidelity 4D Hand-Object Capture via Multi-View Spatiotemporal Tracking and Physics-Aware Gaussians</title>
+
+  <link href="static/css/bootstrap-4.4.1.css" rel="stylesheet">
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/rerun-viewer.css">
+  <link rel="stylesheet" href="./static/css/viewer-custom.css">
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h2 class="title is-2 publication-title" style="margin-top: 0; margin-bottom: 2">High-Fidelity 4D Hand-Object Capture
+              via Multi-View Spatiotemporal Tracking and Physics-Aware Gaussians</h2>
+
+
+          <div class="is-size-5 publication-authors">
+    <span class="author-block"><a href="https://scholar.google.com/citations?user=xqY0Do8AAAAJ&hl=en&oi=sra"
+        target="_blank">Bo Peng</a><sup>*1,2</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="author-block"><a href="https://scholar.google.com/citations?user=zkUFoAIAAAAJ&hl=en" target="_blank">Xu
+        Chen</a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="author-block"><a href="https://scholar.google.com/citations?user=CPakAgoAAAAJ&hl=en" target="_blank">Yi
+        Gu</a><sup>1,3</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="author-block"><a href="https://muskie82.github.io/" target="_blank">Hidenobu
+        Matsuki</a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="author-block"><a href="https://scholar.google.com/citations?user=DB8aKRgAAAAJ&hl=en"
+        target="_blank">Mingsong Dou</a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="author-block"><a href="https://scholar.google.com/citations?user=I3eabQUAAAAJ&hl=en"
+        target="_blank">Jingjing Shen</a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="author-block"><a href="https://www.ics.uci.edu/~deyingk/" target="_blank">Deying
+        Kong</a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="author-block"><a href="http://staff.ustc.edu.cn/~juyong/" target="_blank">Juyong
+        Zhang</a><sup>2</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+  <span class="author-block"><a href="https://zyshen021.github.io/" target="_blank">Zhengyang
+      Shen</a><sup>*1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+
+            <div class="is-size-5 publication-authors" style="margin-top: 10px;">
+              <span class="author-block"><sup>1</sup>Google XR</span>
+            </div>
+            <div class="is-size-5 publication-authors" style="margin-top: 2px;">
+              <span class="author-block"><sup>2</sup>University of Science and Technology of China (USTC)</span>&nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="author-block"><sup>3</sup>The Hong Kong University of Science and Technology (Guangzhou)</span>
+            </div>
+
+            <div class="is-size-6 publication-authors" style="margin-top: 5px;">
+              <span class="author-block"><sup>*</sup>Equal contribution</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links" style="margin-top: 0; margin-bottom: 2">
+                <span class="link-block">
+                  <a href="*" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video id="teaser" autoplay muted loop playsinline width="100%">
+          <source src="./assets/videos/goal.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <h2 class="subtitle has-text-centered" style="margin-top: 15px">
+          Our system robustly reconstructs 4D hand-object interactions from multi-view videos <strong>without</strong>
+          requiring any pre-scanned object templates or physical markers, decomposing appearance to recover pristine 3D
+          geometry.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive 3D Visualizer Section -->
+  <section class="section" style="padding-bottom: 0px;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="viewer-shell" id="interactive-viewer">
+            <div class="viewer-header">
+              <h2 class="title is-3 has-text-centered" style="margin-bottom: 8px;">Interactive 3D Visualizer</h2>
+              <div class="has-text-centered" style="color: #555; margin-bottom: 12px;">
+                Interactive 3D reconstruction showing hand-object pose and mesh alignment. (Some sequences include markers for evaluation purposes only.)
+              </div>
+            </div>
+            <div class="viewer-stage">
+              <div id="agile-viewer"></div>
+            </div>
+            <div id="agile-thumbnail-gallery" class="agile-thumbnail-gallery"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3" style="margin-top: -30px">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              The growing demand for high-fidelity 4D hand-object interaction (HOI) data in embodied AI and spatial
+              computing is currently bottlenecked by the reliance on pre-scanned object templates and physical markers.
+              While recent methods have demonstrated promising results in reconstructing 4D hand-object interaction from
+              videos, they are highly sensitive to initial estimates of hand and object poses. Yet, estimating these
+              poses from images is challenging, in particular under severe occlusion which is inherent in hand-object
+              interaction scenarios.
+            </p>
+            <p>
+              We propose a novel system for the robust and accurate reconstruction of hands and objects from multi-view
+              videos without requiring any templates or markers. Our system consists of two main components with key
+              innovations: <strong>(1) HOST</strong>, a multi-view feed-forward transformer model that aggregates
+              cross-view geometry and temporal cues to provide a reliable initialization; and <strong>(2) HOPG</strong>,
+              a hand-object physics-aware Gaussian-based optimization framework integrating tetrahedral constraints and
+              collision refinement to produce physically plausible and visually accurate reconstruction.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3" style="margin-top: -20px">Pipeline Overview</h2>
+
+          <img src="./assets/images/pipeline.jpg" class="center" alt="Framework Pipeline">
+          <div class="content has-text-justified">
+            <p style="margin-top: 30px">
+              Our pipeline operates in two stages. First, the <strong>Hand Object Spatiotemporal Transformer
+                (HOST)</strong> processes multi-view videos to robustly regress parametric hand/object poses, dense
+              object point clouds, and segmentation masks, yielding a metric 3D initialization. Second, the <strong>Hand
+                Object Physics-aware Gaussian (HOPG)</strong> module leverages this initialization to optimize a hybrid
+              2D Gaussian representation. By enforcing structural constraints and explicitly decoupling diffuse and
+              specular appearance, HOPG effectively prevents illumination bake-in.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hero is-light is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-4 has-text-centered" style="margin-bottom: 20px;">Robust Tracking with HOST</h2>
+        <div id="results-carousel" class="carousel results-carousel" data-slides-to-show="3">
+
+          <div class="item">
+            <video poster="" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/videos/car.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="item">
+            <video poster="" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/videos/ghostpen.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="item">
+            <video poster="" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/videos/longcan.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="item">
+            <video poster="" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/videos/pumkin.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="item">
+            <video poster="" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/videos/redplate.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="item">
+            <video poster="" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/videos/scissors.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="item">
+            <video poster="" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/videos/singlehand.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="item">
+            <video poster="" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/videos/sonic.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="item">
+            <video poster="" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/videos/squirrel.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="item">
+            <video poster="" autoplay controls muted loop playsinline height="100%">
+              <source src="./assets/videos/Thanos.mp4" type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3 has-text-centered" style="margin-top: -30px">Appearance Decomposition & Rendering</h2>
+          <div class="content has-text-justified">
+            <p>
+              HOPG achieves photorealistic rendering by decomposing appearance into diffuse and specular components.
+              This explicit lighting decoupling prevents artifacts from baking into the geometry, yielding clean normal
+              maps and high-fidelity 3D assets.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container is-max-desktop">
+      <div id="decomposition-carousel" class="carousel results-carousel" data-slides-to-show="1">
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/videos/watergun_recon.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/videos/transformer_recon.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/videos/airfresher_recon.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/videos/car_recon.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/videos/elsa_recon.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/videos/ghostpen_recon.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/videos/pockcup_recon.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/videos/whitebird_recon.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/videos/Thanos.mp4" type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3 has-text-centered" style="margin-top: -30px">High-Fidelity Object Geometry</h2>
+          <div class="content has-text-justified">
+            <p>
+              Detailed 3D meshes of complex, real-world objects extracted via TSDF fusion from our refined 2D Gaussian
+              representation. Even without templates, our method recovers intricate geometric details and preserves
+              structural integrity under complex occlusions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container is-max-desktop">
+      <div id="mesh-carousel" class="carousel results-carousel" data-slides-to-show="3">
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/meshe_rendering/car.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/meshe_rendering/elsa.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/meshe_rendering/pokemon.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/meshe_rendering/squrrel.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/meshe_rendering/transformer.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/meshe_rendering/watergun.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item">
+          <video poster="" autoplay controls muted loop playsinline height="100%">
+            <source src="./assets/meshe_rendering/whitebird.mp4" type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <div class="content has-text-justified">
+        <p>
+          If you find our work useful, please cite our paper:
+        </p>
+      </div>
+      <pre><code>@inproceedings{todo
+}</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0
+                International License</a>.
+              This webpage template is from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="./viewer-init.js"></script>
+</body>
+
+</html>

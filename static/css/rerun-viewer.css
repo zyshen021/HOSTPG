@@ -1,0 +1,475 @@
+/* Rerun Viewer Styles */
+
+/* Rerun Viewer Container */
+.rerun-container {
+  /* Constrain to site content width and center. Uses site variables from style.css */
+  width: 150%;
+  margin: 1em 0 1em -20%;
+
+  max-width: var(--content-max-width, 1600px);
+  /* margin: 1em auto; */
+  padding: 1.5em var(--content-side-padding, 50px);
+  background-color: rgb(190, 219, 235);
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: padding 220ms ease, margin 220ms ease, width 220ms ease;
+  will-change: padding, width, margin;
+}
+
+.rerun-container > #viewer {
+  width: 70%;
+  /* Use aspect-ratio when supported to maintain 3:2 viewer size; fallback to fixed height */
+  aspect-ratio: 3 / 2;
+  height: auto;
+  min-height: 240px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  background-color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto 0.15em; /* centered horizontally, reduced gap */
+}
+
+/* Small tip line under the Interactive Viewer heading */
+.viewer-tip {
+  color: #555;
+  font-size: 0.95em;
+  margin-top: 0.25em;
+}
+
+/* Make the viewer heading and tip larger and slightly bolder */
+.rerun-container h3 {
+  font-size: 1.6rem; /* larger heading */
+  font-weight: 700;
+  margin: 0 0 0.2em 0; /* remove top margin, keep small bottom gap */
+}
+.rerun-container .viewer-tip {
+  font-size: 1.15rem; /* slightly larger tip */
+  font-weight: 500;
+}
+
+/* Reduce default spacing for details/summary in the instructions block */
+.viewer-instructions summary {
+  margin: 0;
+  padding: 0;
+}
+.viewer-instructions {
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+}
+
+/* Force WebViewer canvas/iframe to fill container, but exclude our UI control panel so it isn't stretched */
+.rerun-container > #viewer > *:not(#controlPanel),
+.rerun-container > #viewer > *:not(#controlPanel) > * {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* If the control panel is placed inside #viewer, keep it small and absolutely positioned */
+.rerun-container > #viewer > #controlPanel {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 220px;
+  max-height: 360px;
+  z-index: 2000;
+}
+
+/* Control panel (moved from inline styles in demo.js) */
+#controlPanel,
+.control-panel {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 220px;
+  max-height: 360px;
+  background: rgba(30, 30, 30, 0.95);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 8px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  z-index: 2000;
+  overflow-y: auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.control-panel .control-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:0 0 6px 0;
+  padding-bottom:4px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+
+.control-panel .control-header h3 {
+  margin: 0;
+  font-size: 13px;
+  color: #fff;
+}
+
+.control-panel .control-toggle {
+  background: transparent;
+  border: none;
+  color: #ddd;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 6px;
+}
+
+.control-panel .control-section { margin-bottom: 10px; }
+.control-panel .control-section h4 { margin: 0 0 6px 0; color: #ccc; font-size: 12px; }
+.control-panel .control-note { background: rgba(255,255,255,0.03); padding: 4px; border-radius: 4px; font-size: 11px; line-height: 1.2; }
+
+.control-panel .actions-row { display:flex; gap:6px; justify-content: space-between; }
+.control-panel .action-button {
+  background: #f08fb5;
+  border: none;
+  color: white;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+}
+.control-panel #resetViewBtn { background: #53ca6f; }
+.control-panel #cameraViewBtn { background: #556bff; }
+.control-panel #toggleFrustumBtn { background: #2bb3ac; }
+.control-panel #toggleAxesBtn { background: #2dd4bf; }
+.control-panel #toggleAutoRotateBtn { background: #ffd166; color: black; }
+
+.control-panel .control-label { display:block; margin-bottom:4px; font-size:11px; }
+.control-panel .control-range { width:100%; height:6px; background:#333; }
+
+.action-button-video {
+  background: #2bb3ac;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+/* Make action labels visible by default (next to icons) */
+.action-text {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 8px;
+  color: #ffffffdd;
+  font-weight: 600;
+}
+
+/* Frame slider disabled state */
+.control-range:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #222;
+}
+
+.control-range:disabled::-webkit-slider-thumb {
+  cursor: not-allowed;
+  background: #555;
+}
+
+.control-range:disabled::-moz-range-thumb {
+  cursor: not-allowed;
+  background: #555;
+}
+
+/* In case user toggles vertical layout, keep labels visible and adjust spacing */
+.actions-row.vertical .action-text {
+  margin-left: 8px;
+  color: #e8e8e8;
+}
+
+/* Thumbnail image presentation fallback rule */
+.rerun-thumbnail img, .rerun-thumbnail-img { display:block; height:100%; width:auto; object-fit:contain; }
+
+/* Collapsed control panel: hide all sections except header */
+.control-panel.collapsed {
+  max-height: 36px;
+  width: 120px;
+  overflow: hidden;
+}
+.control-panel.collapsed .control-section,
+.control-panel.collapsed .actions-row,
+.control-panel.collapsed .control-range,
+.control-panel.collapsed .control-label {
+  display: none !important;
+}
+
+/* Button affordance: hover/focus styles moved to CSS */
+.action-button {
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+.action-button.btn-hover,
+.action-button:hover,
+.action-button:focus {
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+  opacity: 1;
+}
+.action-button.btn-leave {
+  transform: none;
+  box-shadow: none;
+  opacity: 0.9;
+}
+
+/* Toggle button active states */
+.action-button.active { opacity: 1 !important; }
+.action-button.inactive { opacity: 0.55; }
+
+.rerun-thumbnails-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5em;
+  padding: 0 50px; 
+}
+
+/* Styles that replace inline styles previously set by demo.js */
+.rerun-thumbnails-wrapper.compact {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rerun-thumbnails {
+  display: flex;
+  gap: 1em;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  padding: 1.2em 1.5em; /* reduced top padding */
+  margin: 0;
+  -ms-overflow-style: none; /* IE and Edge */
+  perspective: 700px;
+  position: relative;
+}
+
+/* thumbnail strip presentation that used to be set inline in demo.js */
+.rerun-thumbnails.compact {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 6px;
+  scroll-behavior: smooth;
+  align-items: center;
+  max-width: 100%;
+}
+
+.rerun-thumbnails::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.rerun-thumbnail {
+  flex: 0 0 auto;
+  height: 145px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 3px solid #dee2e6;
+  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.rerun-thumbnail:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  border-color: rgba(0, 123, 255, 0.3);
+}
+
+.rerun-thumbnail img {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+/* Fallback label inside thumbnails (when no image is available) */
+.rerun-thumbnail .fallback-label {
+  color: white;
+  font-size: 0.9em;
+  display: inline-block;
+  padding: 8px;
+  height: 100%;
+  line-height: 64px;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 60%;
+  /* transform: translateY(-15px); */
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 45px;
+  height: 40px; /* match demo.js */
+  border-radius: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8em;
+  line-height: 1;
+  transition: scale 0.1s ease-in-out;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-button:hover:not(:disabled) {
+  scale: 1.1;
+}
+
+.carousel-button:active:not(:disabled) {
+  scale: 0.95;
+}
+
+.carousel-button.prev {
+  left: 0;
+}
+
+.carousel-button.next {
+  right: 0;
+}
+
+.carousel-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.carousel-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.rerun-thumbnail.active {
+  border-color: #007bff;
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.5);
+  transform: translateZ(5px);
+}
+
+.rerun-loading {
+  width: 100%;
+  padding: 0.75em 1em;
+  background-color: #ffffff;
+  border-radius: 6px;
+  /* font-family: 'Courier New', monospace; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.9em;
+  text-align: center;
+  color: #495057;
+  border: 1px solid #dee2e6;
+  margin-top: 0;
+}
+
+/* Loading overlay inside the viewer */
+#glbLoadingOverlay {
+  position: absolute;
+  left: 50%;
+  top: 12%;
+  transform: translate(-50%, 0);
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 0 0 auto;
+  width: auto;
+  z-index: 1990; /* just below controlPanel (2000) */
+}
+
+#glbLoadingOverlay .glb-loading-inner {
+  box-sizing: border-box;
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+  flex: 0 0 220px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: stretch;
+}
+
+#glbLoadingOverlay #glbLoadingText {
+  font-size: 11px;
+  color: #494949;
+  opacity: 0.95;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+#glbLoadingOverlay .glb-loading-track {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  height: 6px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+#glbLoadingOverlay #glbLoadingBar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg,#cfe9ff,#7cc7ff);
+  transition: width 220ms linear;
+  min-width: 4%;
+}
+
+@media (max-width: 768px) {
+  /* Ensure rerun viewer fits the mobile content width and aligns with other content */
+  .rerun-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 1em 0 !important;
+    padding: 0.8em 16px !important;
+    box-sizing: border-box;
+    transition: padding 220ms ease, margin 220ms ease, width 220ms ease;
+  }
+
+  .rerun-container > #viewer {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    min-height: 200px;
+  }
+
+  .rerun-thumbnails-wrapper {
+    padding: 0 8px;
+  }
+
+  .rerun-thumbnail {
+    min-width: 84px;
+    min-height: 84px;
+  }
+
+  /* Make the control panel smaller and scrollable on mobile */
+  #controlPanel,
+  .control-panel {
+    /* width: 160px !important; */
+    max-height: 220px !important;
+    font-size: 11px !important;
+    left: 6px !important;
+    top: 6px !important;
+    background: rgba(30, 30, 30, 0.7);
+    /* padding: 6px !important; */
+    /* overflow-y: auto !important; */
+  }
+
+  #controlPanel .control-header h3,
+  .control-panel .control-header h3 {
+    font-size: 12px !important;
+  }
+}
